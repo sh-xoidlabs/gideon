@@ -493,7 +493,7 @@ async function main() {
     const elapsed = Date.now() - t11start;
 
     info(`Duration: ${elapsed}ms`);
-    result.provider === "openai_graph" ? pass(`provider = ${result.provider}`) : fail(`provider = ${result.provider}`);
+    result.provider === "miromind_api" ? pass(`provider = ${result.provider}`) : fail(`provider = ${result.provider}`);
     result.fromCache ? pass("cache HIT — no redundant provider call") : pass("live call completed (not cached)");
     result.contentText.length > 0 ? pass(`contentText length = ${result.contentText.length}`) : fail("contentText empty");
     result.sourceRefs.length > 0 ? pass(`sourceRefs = ${result.sourceRefs.length}`) : fail("no sourceRefs");

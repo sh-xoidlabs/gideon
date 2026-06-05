@@ -88,7 +88,8 @@ const envSchema = z.object({
   OPENAI_EMBEDDING_MODEL: z.string().default("text-embedding-3-large"),
   OPENAI_EMBEDDING_DIMENSIONS: z.coerce.number().int().positive().optional(),
   // Web Intelligence 
-  WEB_RESEARCH_PROVIDER: z.string().default("openai_graph"),
+  MIROMIND_API_KEY: optionalString(),
+  WEB_RESEARCH_PROVIDER: z.string().default("miromind_api"),
   WEB_SEARCH_PROVIDER: z.string().default("openai_web_search"),
   WEB_EXTRACT_PROVIDER: z.string().default("reasoning_extract"),
   WEB_EXTRACT_FALLBACK: z.enum(["internal", "playwright", "none"]).default("none"),

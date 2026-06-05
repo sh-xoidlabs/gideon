@@ -55,9 +55,15 @@ All LLM calls are contained in `backend/src/ai/`. The core execution engine uses
 
 **Sub-modules:**
 
+### MiroMindAI Platform Integration
+Gideon leverages the **MiroMindAI Platform** and its **MiroThinker** models to power advanced web intelligence and reasoning workflows. As an OpenAI-compatible interface, it seamlessly plugs into the existing LangGraph execution engine.
+- **Deep Web Research (`web.researchTask`)**: When an agent (like the Research Assistant or Sales Assistant) requires robust, source-backed public information, the `MiroThinker-1.7` model is invoked via the `api.miromind.ai/v1/chat/completions` endpoint to explore the web, synthesize complex multi-source data, and natively return cited facts.
+- **Evidence-Based Reasoning**: By utilizing MiroThinker models, the pipeline delegates heavy analytical tasks (like competitor battlecard generation or funding signal extraction) to an engine explicitly optimized for high-fidelity, non-hallucinated verification.
+- **Basic LLM Fallback (`MiromindLlmProvider`)**: Serves as a resilient supplemental completion adapter for fallback generation tasks.
+
 | Module | Purpose |
 |--------|---------|
-| `ai/providers/` | OpenAI LLM and embedding adapters |
+| `ai/providers/` | OpenAI and MiroMindAI Platform (MiroThinker) adapters |
 | `ai/manifests/` | Dynamic capability manifest injected into every planner prompt |
 | `ai/prompts/` | Composable prompt builder with persona and SOP injections |
 | `ai/sops/` | Semantic retrieval of operating procedures matched to the user's intent |
@@ -107,6 +113,7 @@ These are distinct systems and must not be conflated.
 * Node.js 18.18+ (tested on 22.11.0)
 * Firebase project with Authentication and Firestore enabled
 * OpenAI API Key
+* MiroMindAI API Key (for MiroThinker deep reasoning and web research models)
 
 ### 1. Frontend
 ```bash
@@ -151,6 +158,7 @@ npm run eval:intelligence         # Run evaluation suite (requires Firestore emu
 ## Current Status and Roadmap
 
 * **OpenAI Migration:** Complete. All legacy APIs have been replaced with dedicated OpenAI and LangGraph architectures.
+* **MiroMindAI Platform Integration:** Integrated the MiroMind API. The system now utilizes the powerful **MiroThinker** model series for deep reasoning, automated web exploration, and evidence-based verification within the core `web.researchTask` agent capabilities.
 * **Workflow Intelligence:** Hardened. Background steps process data efficiently without conversational hallucinations.
 * **File Uploads:** In development. Users will soon be able to upload documents or PDFs as context sources.
 * **Production Integrations:** Gmail OAuth and HubSpot are undergoing final verification and end-to-end testing before full public release.
